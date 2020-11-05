@@ -66,3 +66,44 @@ struct song_node *add_order(char *name, char *artist, struct song_node *songs)
     free(dummy); 
     return first; 
 }
+
+struct song_node *find_song(struct song_node *songs, char * artist, char * name)
+{
+    while(songs)
+    {
+        if(!strcmp(*artist, songs->artist) && !strcmp(*name, songs->name))
+            return songs;
+        songs = songs->next; 
+    }
+    return NULL;   
+} 
+
+struct song_node *find_artist(struct song_node *songs, char * artist) 
+{
+    while(songs)
+    {
+        if(!strcmp(artist, songs->artist)) 
+            return songs; 
+        songs = songs->next; 
+    }
+    return NULL; 
+} 
+
+int length(struct song_node *songs)
+{  
+    int i = 0; 
+    while(songs)
+    {
+        ++i; 
+        songs = songs->next; 
+    }
+    return i; 
+}
+
+struct song_node *rand_song(struct song_node *songs)
+{
+    int n = rand() % length(songs); 
+    for(int i = 0; i < n; ++i)
+        songs = songs->next; 
+    return songs; 
+}
