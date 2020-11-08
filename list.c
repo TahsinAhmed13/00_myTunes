@@ -1,11 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "list.h"
 
 void print_song(struct song_node *song)
 {
-    printf("%s: %s\n", song->artist, song->name); 
+    printf("%s: %s", song->artist, song->name); 
 }
 
 void print_songs(struct song_node *songs)
@@ -13,22 +14,13 @@ void print_songs(struct song_node *songs)
     while(songs)
     {
         print_song(songs); 
+        printf(" | "); 
         songs = songs->next; 
     }
+    printf("\n"); 
 }
 
-struct song_node *free_songs(struct song_node *songs)
-{
-    struct song_node *nxt = songs;
-    while(songs){
-        nxt = songs->next;
-        free(songs);
-        songs = nxt;
-    }   
-    return NULL; 
-}
-
-struct song_node *new_song(char *name, char *artist)
+struct song_node *new_song(char *artist, char *name)
 {
     struct song_node *song = (struct song_node *) malloc(sizeof(struct song_node)); 
     strcpy(song->name, name); 
@@ -36,56 +28,68 @@ struct song_node *new_song(char *name, char *artist)
     return song; 
 }
 
-struct song_node *add_top(char *name, char *artist, struct song_node *songs)
+struct song_node *add_top(struct song_node *songs, char *artist, char *name)
 {
-    struct song_node *my_song = new_song(name, artist); 
+    printf("Add to Top: [%s, %s]\n", artist, name); 
+    struct song_node *my_song = new_song(artist, name); 
     my_song->next = songs; 
     return my_song; 
 }
 
-struct song_node *add_order(char *name, char *artist, struct song_node *songs)
+struct song_node *add_order(struct song_node *songs, char *artist, char *name)
 {
+    printf("Add in Order: [%s, %s]\n", artist, name); 
+    struct song_node *my_song = new_song(artist, name); 
     struct song_node *dummy = new_song("", ""); 
     dummy->next = songs; 
-    struct song_node *my_song = new_song(name, artist); 
     struct song_node *last = dummy; 
+
     while(songs)
     {
-        int cmp = strcmp(my_song->artist, songs->artist); 
-        int cmp2 = strcmp(my_song->name, songs->name); 
+        int cmp = strcmp(artist, songs->artist); 
+        int cmp2 = strcmp(name, songs->name); 
         if(cmp < 0 || (cmp == 0 && cmp2 <= 0))
-        {
-            last->next = my_song; 
-            my_song->next = songs; 
             break; 
-        }
         last = songs; 
         songs = songs->next; 
     }
-    struct song_node *first = dummy->next; 
+    last->next = my_song; 
+    my_song->next = songs; 
+
+    songs = dummy->next; 
     free(dummy); 
-    return first; 
+    return songs; 
 }
 
-struct song_node *find_song(struct song_node *songs, char * artist, char * name)
+struct song_node *find_song(struct song_node *songs, char *artist, char *name)
 {
+    printf("Finding Song: [%s, %s]\n", artist, name); 
     while(songs)
     {
-        if(!strcmp(*artist, songs->artist) && !strcmp(*name, songs->name))
+        if(!strcmp(artist, songs->artist) && !strcmp(name, songs->name))
+        {
+            printf("\tsong found! "); 
             return songs;
+        }
         songs = songs->next; 
     }
+    printf("\tsong not found:( "); 
     return NULL;   
 } 
 
-struct song_node *find_artist(struct song_node *songs, char * artist) 
+struct song_node *find_artist(struct song_node *songs, char *artist) 
 {
+    printf("Finding Artist: %s\n", artist); 
     while(songs)
     {
         if(!strcmp(artist, songs->artist)) 
+        {
+            printf("\tartist found! "); 
             return songs; 
+        }
         songs = songs->next; 
     }
+    printf("\tartist not found:( "); 
     return NULL; 
 } 
 
@@ -106,4 +110,38 @@ struct song_node *rand_song(struct song_node *songs)
     for(int i = 0; i < n; ++i)
         songs = songs->next; 
     return songs; 
+}
+
+struct song_node *remove_song(struct song_node *songs, char *artist, char *name)
+{
+    printf("Removing Song: [%s, %s]\n", artist, name); 
+    struct song_node *dummy = new_song("", ""); 
+    dummy->next = songs; 
+    struct song_node *last = dummy; 
+    while(songs)
+    {
+        if(!strcmp(artist, songs->artist) && !strcmp(name, songs->name))
+        {
+            last->next = songs->next; 
+            free(songs); 
+            break; 
+        }
+        last = songs; 
+        songs = songs->next; 
+    }
+    songs = dummy->next; 
+    free(dummy); 
+    return songs; 
+}
+
+struct song_node *free_songs(struct song_node *songs)
+{
+    struct song_node *nxt = songs;
+    while(songs){
+        nxt = songs->next;
+        printf("Freeing Node: [%s, %s]\n", songs->artist, songs->name); 
+        free(songs);
+        songs = nxt;
+    }   
+    return NULL; 
 }
