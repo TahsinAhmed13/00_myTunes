@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "library.h"
 
@@ -60,15 +61,19 @@ struct song_node **free_library(struct song_node **lib)
 
 void print_letter_library(struct song_node **lib, char c) 
 {
-    print_songs(lib[get_index(c)]);
+    char fake[1];
+    fake[0] = c; 
+    printf("printing songs in '%c' list\n\t", c);
+    print_songs(lib[get_index(fake)]);
 }
 
-void print_artist_library(struct song_node **lib, char* artist)
+void print_artist_library(struct song_node **lib, char *artist)
 {
-    struct song_node *s = find_artist_library(lib, artist); 
-    while(!strcmp(s->artist, artist))
+    struct song_node *s = lib[get_index(artist)]; 
+    printf("printing songs with artist '%s'\n\t", artist);
+    while(s && !strcmp(s->artist, artist))
     {
-        print_song(s); 
+        print_song(s);  
         s = s->next; 
     }
 }
@@ -76,8 +81,11 @@ void print_artist_library(struct song_node **lib, char* artist)
 void print_library(struct song_node **lib)
 {
     int i;
-    for(i = 0; i < 27; i++)
+    printf("printing songs in other symbols list\n\t");
+        print_songs(lib[0]);
+    for(i = 1; i < 27; i++)
     {
+        printf("printing songs in '%c' list\n\t", 'a' + i - 1);
         print_songs(lib[i]);
     }
 }

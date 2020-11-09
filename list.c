@@ -6,15 +6,14 @@
 
 void print_song(struct song_node *song)
 {
-    printf("%s: %s", song->artist, song->name); 
+    printf("[%s: %s] ", song->artist, song->name); 
 }
 
 void print_songs(struct song_node *songs)
 {
     while(songs)
     {
-        print_song(songs); 
-        printf(" | "); 
+        print_song(songs);  
         songs = songs->next; 
     }
     printf("\n"); 
