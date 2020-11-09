@@ -57,3 +57,34 @@ struct song_node **free_library(struct song_node **lib)
     free(lib); 
     return NULL; 
 }
+
+void print_letter_library(struct song_node **lib, char c) 
+{
+    int i;
+    // A - Z: 65 - 90
+    // a - z: 97 - 122
+    if (c >= 65 && c <= 90 ) i = c - 65;
+    if (c >= 97 && c <= 122) i = c - 97; 
+    else i = 26; //other symbols
+    print_songs(lib[i]);
+}
+
+void print_artist_library(struct song_node **lib, char* artist)
+{
+    struct song_node *s = find_artist_library(lib, artist); 
+    while(!strcmp(s->artist, artist))
+    {
+        print_song(s); 
+        s = s->next; 
+    }
+}
+
+void print_library(struct song_node **lib)
+{
+    int i;
+    for(i = 0; i < 27; i++)
+    {
+        print_songs(lib[i]);
+    }
+}
+
