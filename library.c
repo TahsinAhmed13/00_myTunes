@@ -78,6 +78,10 @@ struct song_node *find_artist_library(struct song_node **lib, char *artist)
     return find_artist(lib[i], artist); 
 }
 
+struct song_node *del_song_library(struct song_node **lib, char *artist, char *name){
+    remove_song(lib[get_index(artist)], artist, name);
+}
+
 struct song_node **free_library(struct song_node **lib)
 {
     for(int i = 0; i < 27; ++i)

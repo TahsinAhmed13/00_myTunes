@@ -104,7 +104,7 @@ int main()
     print_artist_library(lib, "led zeppelin"); 
     printf("\n===============\n\n"); 
 
-    printf("Testing find_song_lib:\n"); 
+    printf("Testing find_song_library:\n"); 
     index = find_song_library(lib, "queen", "bohemain rhapsody"); 
     printf("\t"); 
     print_song(index); 
@@ -117,10 +117,16 @@ int main()
     printf("\n");  
     printf("\n===============\n\n"); 
 
-    printf("Testing find_artist_lib:\n"); 
+    printf("Testing find_artist_library:\n"); 
     index = find_artist_library(lib, "led zeppelin"); 
     printf("\t"); 
     print_song(index); 
+    printf("\n"); 
+    printf("\n===============\n\n"); 
+
+    printf("Testing del_song_library:\n"); 
+    printf("\t"); 
+    del_song_library(lib, "led zeppelin", "kashmir"); 
     printf("\n"); 
     printf("\n===============\n\n"); 
 
