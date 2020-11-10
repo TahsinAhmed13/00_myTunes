@@ -136,7 +136,8 @@ struct song_node *remove_song(struct song_node *songs, char *artist, char *name)
 struct song_node *free_songs(struct song_node *songs)
 {
     struct song_node *nxt = songs;
-    while(songs){
+    while(songs)
+    {
         nxt = songs->next;
         printf("Freeing Node: [%s, %s]\n", songs->artist, songs->name); 
         free(songs);

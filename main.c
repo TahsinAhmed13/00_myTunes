@@ -90,6 +90,18 @@ int main()
     lib = add_to_library(lib, "david bowie", "life on mars?"); 
     printf("\n===============\n\n"); 
 
+    printf("Testing print_library:\n"); 
+    print_library(lib); 
+    printf("\n===============\n\n"); 
+
+    printf("Testing print_letter_library:\n"); 
+    print_letter_library(lib, 'l'); 
+    printf("\n===============\n\n"); 
+
+    printf("Testing print_artist_library:\n"); 
+    print_artist_library(lib, "led zeppelin"); 
+    printf("\n===============\n\n"); 
+
     printf("Testing find_song_lib:\n"); 
     index = find_song_library(lib, "queen", "bohemain rhapsody"); 
     printf("\t"); 
@@ -108,18 +120,6 @@ int main()
     printf("\t"); 
     print_song(index); 
     printf("\n"); 
-    printf("\n===============\n\n"); 
-
-    printf("Testing print_library:\n"); 
-    print_library(lib); 
-    printf("\n===============\n\n"); 
-
-    printf("Testing print_letter_library:\n"); 
-    print_letter_library(lib, 'l'); 
-    printf("\n===============\n\n"); 
-
-    printf("Testing print_artist_library:\n"); 
-    print_artist_library(lib, "led zeppelin"); 
     printf("\n===============\n\n"); 
 
     printf("Testing free_library:\n"); 

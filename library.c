@@ -26,6 +26,33 @@ char get_initial(int i)
     return '0'; 
 }
 
+void print_letter_library(struct song_node **lib, char c) 
+{
+    printf("printing songs in '%c' list\n\t", c);
+    print_songs(lib[get_index(&c)]);
+}
+
+void print_artist_library(struct song_node **lib, char *artist)
+{
+    struct song_node *s = lib[get_index(artist)]; 
+    printf("printing songs with artist '%s'\n\t", artist);
+    while(s && !strcmp(s->artist, artist))
+    {
+        print_song(s);  
+        s = s->next; 
+    }
+}
+
+void print_library(struct song_node **lib)
+{
+    for(int i = 1; i < 27; i++)
+        if(lib[i])
+        {
+            printf("printing songs in '%c' list\n\t", get_initial(i));
+            print_songs(lib[i]);
+        }
+}
+
 struct song_node **add_to_library(struct song_node **lib, char *artist, char *name)
 {
     int i = get_index(artist); 
@@ -51,42 +78,11 @@ struct song_node *find_artist_library(struct song_node **lib, char *artist)
 struct song_node **free_library(struct song_node **lib)
 {
     for(int i = 0; i < 27; ++i)
-    {
-        printf("freeing %c list\n", get_initial(i)); 
-        free_songs(lib[i]); 
-    }
+        if(lib[i])
+        {
+            printf("freeing %c list\n", get_initial(i)); 
+            free_songs(lib[i]); 
+        }
     free(lib); 
     return NULL; 
 }
-
-void print_letter_library(struct song_node **lib, char c) 
-{
-    char fake[1];
-    fake[0] = c; 
-    printf("printing songs in '%c' list\n\t", c);
-    print_songs(lib[get_index(fake)]);
-}
-
-void print_artist_library(struct song_node **lib, char *artist)
-{
-    struct song_node *s = lib[get_index(artist)]; 
-    printf("printing songs with artist '%s'\n\t", artist);
-    while(s && !strcmp(s->artist, artist))
-    {
-        print_song(s);  
-        s = s->next; 
-    }
-}
-
-void print_library(struct song_node **lib)
-{
-    int i;
-    printf("printing songs in other symbols list\n\t");
-        print_songs(lib[0]);
-    for(i = 1; i < 27; i++)
-    {
-        printf("printing songs in '%c' list\n\t", 'a' + i - 1);
-        print_songs(lib[i]);
-    }
-}
-
