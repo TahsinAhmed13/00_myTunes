@@ -36,9 +36,12 @@ void print_artist_library(struct song_node **lib, char *artist)
 {
     struct song_node *s = lib[get_index(artist)]; 
     printf("printing songs with artist '%s'\n\t", artist);
-    while(s && !strcmp(s->artist, artist))
+    while(s)
     {
-        print_song(s);  
+        if(!strcmp(s->artist, artist)){
+            print_song(s);  
+        }
+        
         s = s->next; 
     }
 }

@@ -14,6 +14,7 @@ int main()
     printf("Testing add_order:\n"); 
     songs = add_order(songs, "queen", "bohemain rhapsody"); 
     songs = add_order(songs, "led zeppelin", "kashmir"); 
+    songs = add_order(songs, "lamb of god", "redneck"); 
     songs = add_order(songs, "guns n' roses", "november rain"); 
     songs = add_order(songs, "led zeppelin", "stairway to heaven"); 
     songs = add_order(songs, "david bowie", "life on mars?"); 
@@ -21,7 +22,7 @@ int main()
 
     printf("Testing add_top:\n"); 
     songs = add_top(songs, "ac/dc", "highway to hell"); 
-    songs = add_top(songs, "metellica", "enter sandman"); 
+    songs = add_top(songs, "metallica", "enter sandman"); 
     songs = add_top(songs, "black sabbath", "war pigs"); 
     printf("\n===============\n\n"); 
 
@@ -84,6 +85,7 @@ int main()
     printf("Testing add_to_lib:\n"); 
     lib = add_to_library(lib, "queen", "bohemain rhapsody"); 
     lib = add_to_library(lib, "led zeppelin", "kashmir"); 
+    lib = add_to_library(lib, "lamb of god", "redneck"); 
     lib = add_to_library(lib, "guns n' roses", "november rain"); 
     lib = add_to_library(lib, "led zeppelin", "stairway to heaven");
     lib = add_to_library(lib, "linkin park", "numb"); 

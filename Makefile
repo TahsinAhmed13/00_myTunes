@@ -1,14 +1,14 @@
 main: main.o list.o	library.o
-	cc -o main main.o list.o library.o
+	gcc -o main main.o list.o library.o
 
 main.o: main.c list.h library.h
-	cc -c main.c
+	gcc -c main.c
 
 list.o: list.c list.h
-	cc -c list.c
+	gcc -c list.c
 
 library.o: library.c list.h library.h 
-	cc -c library.c
+	gcc -c library.c
 
 clean: 
 	-rm *.o
