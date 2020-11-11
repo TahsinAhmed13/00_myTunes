@@ -2,11 +2,13 @@
 
 struct song_node **create_library(); 
 
-void print_letter_library(struct song_node **, char c); 
+void print_letter_library(struct song_node **, char); 
 
 void print_artist_library(struct song_node **, char*); 
 
 void print_library(struct song_node **); 
+
+void print_shuffle(struct song_node **); 
 
 struct song_node **add_to_library(struct song_node **, char *, char *); 
 

@@ -104,6 +104,10 @@ int main()
     print_artist_library(lib, "led zeppelin"); 
     printf("\n===============\n\n"); 
 
+    printf("Testing print_shuffle:\n"); 
+    print_shuffle(lib); 
+    printf("\n===============\n\n"); 
+
     printf("Testing find_song_library:\n"); 
     index = find_song_library(lib, "queen", "bohemain rhapsody"); 
     printf("\t"); 

@@ -10,6 +10,16 @@ struct song_node **create_library()
     return lib; 
 }
 
+int length_library(struct song_node **lib)
+{
+    int len = 0;
+    int i;
+
+    for (int i = 0; i < 27; i++) len += length(lib[i]);
+
+    return len; 
+}
+
 int get_index(char c)
 {
     if('a' <= c && c <= 'z')
@@ -50,6 +60,42 @@ void print_library(struct song_node **lib)
             printf("printing songs in '%c' list\n\t", get_initial(i));
             print_songs(lib[i]);
         }
+}
+
+void print_shuffle(struct song_node **lib)
+{
+    int n = length_library(lib);
+    struct song_node temp_lib[n]; 
+
+    int i;
+    int c = 0; 
+    for (i = 0; i < 27; i++)   
+    {
+        struct song_node *songs = lib[i];
+        while(songs)
+        {
+            temp_lib[c] = *songs; 
+            c++; 
+            songs = songs->next;    
+        }
+    }
+
+    for (i = 0; i < n; i++)
+    {
+        int r = i + (rand() % (n-i));
+        struct song_node temp = temp_lib[r];
+        temp_lib[r] = temp_lib[i];
+        temp_lib[i] = temp; 
+    } 
+
+    printf("printing songs shuffled\n\t");
+    for (i = 0; i < n; i++)
+    {
+        
+        print_song(&temp_lib[i]);
+    } 
+    printf("\n"); 
+
 }
 
 struct song_node **add_to_library(struct song_node **lib, char *artist, char *name)
