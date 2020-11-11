@@ -65,7 +65,7 @@ void print_library(struct song_node **lib)
 void print_shuffle(struct song_node **lib)
 {
     int n = length_library(lib);
-    struct song_node temp_lib[n]; 
+    struct song_node *temp_lib[n]; 
 
     int i;
     int c = 0; 
@@ -74,7 +74,7 @@ void print_shuffle(struct song_node **lib)
         struct song_node *songs = lib[i];
         while(songs)
         {
-            temp_lib[c] = *songs; 
+            temp_lib[c] = songs; 
             c++; 
             songs = songs->next;    
         }
@@ -83,7 +83,7 @@ void print_shuffle(struct song_node **lib)
     for (i = 0; i < n; i++)
     {
         int r = i + (rand() % (n-i));
-        struct song_node temp = temp_lib[r];
+        struct song_node *temp = temp_lib[r];
         temp_lib[r] = temp_lib[i];
         temp_lib[i] = temp; 
     } 
@@ -92,7 +92,7 @@ void print_shuffle(struct song_node **lib)
     for (i = 0; i < n; i++)
     {
         
-        print_song(&temp_lib[i]);
+        print_song(temp_lib[i]);
     } 
     printf("\n"); 
 
